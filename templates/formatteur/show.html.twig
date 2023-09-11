@@ -35,7 +35,7 @@
 
     <a href="{{ path('app_formatteur_index') }}">back to list</a>
 
-    <a href="{{ path('app_formatteur_edit', {'idFormatteur': formatteur.id}) }}">edit</a>
+    <a href="{{ path('app_formatteur_edit', {'id': formatteur.id}) }}">edit</a>
 
     {{ include('formatteur/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formateur index{% endblock %}
+
+{% block body %}
+<h1><strong>All  Formateur </strong></h1>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        {% for formateur in formatteurs %}
+            <div class="col-md-6 mb-4">
+                <div class="card ">
+                    <img src="{{ asset('internshiplogo.jpg') }}" class="card-img-top" alt="Formateur Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ formateur.name }} {{ formateur.prenom }}</h5>
+                        <p class="card-text"><strong style="color: gold;">Contact:</strong> {{ formateur.email }}</p>
+                        <p class="card-text"><strong style="color: gold;">Specialité:</strong> {{ formateur.specialite }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

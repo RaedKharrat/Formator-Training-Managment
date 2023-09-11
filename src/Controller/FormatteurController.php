@@ -27,7 +27,22 @@ class FormatteurController extends AbstractController
         ]);
     }
 
-    
+
+
+    #[Route('/listFormateur', name: 'app_formatteur_list', methods: ['GET'])]
+    public function indexx(EntityManagerInterface $entityManager): Response
+    {
+        $formatteurs = $entityManager
+            ->getRepository(Formateur::class)
+            ->findAll();
+
+        return $this->render('formatteur/list.html.twig', [
+            'formatteurs' => $formatteurs,
+        ]);
+    }
+
+
+
     #[Route('/stats', name: 'app_stat', methods: ['GET'])]
 public function statistics(FormateurRepository $FormateurRepository)
 {
@@ -108,7 +123,7 @@ public function statistics(FormateurRepository $FormateurRepository)
     #[Route('/{id}', name: 'app_formatteur_delete', methods: ['POST'])]
     public function delete(Request $request, Formateur $formatteur, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$formatteur->getIdFormatteur(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$formatteur->getId(), $request->request->get('_token'))) {
             $entityManager->remove($formatteur);
             $entityManager->flush();
         }

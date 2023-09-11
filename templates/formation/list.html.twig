@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Available Formation {% endblock %}
+
+{% block body %}
+<h1><strong>All Available Formation </strong></h1>
+<div class="container" style="margin-top: 50px;">
+    <div class="row">
+        {% for formation in formations %}
+            <div class="col-md-8 mb-4">
+                <div class="card ">
+                    <img src="{{ asset('internshiplogo.jpg') }}" class="card-img-top" alt="Formateur Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ formation.nomFor }} </h5>
+                        <p class="card-text"><strong style="color: gold;">Meeting:</strong> {{ formation.dateFor ? formation.dateFor|date('Y-m-d') : '' }}</p>
+                        <span class="card-text"><strong style="color: gold;">Limited:</strong> {{ formation.numbrMaxPer }} Partipcant</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

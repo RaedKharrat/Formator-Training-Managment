@@ -28,6 +28,18 @@ class FormationController extends AbstractController
         ]);
     }
 
+    #[Route('/listFormation', name: 'app_formation_list', methods: ['GET'])]
+    public function indexx(EntityManagerInterface $entityManager): Response
+    {
+        $formations = $entityManager
+            ->getRepository(Formationn::class)
+            ->findAll();
+
+        return $this->render('formation/list.html.twig', [
+            'formations' => $formations,
+        ]);
+    }
+
     #[Route('/trieasc', name: 'app_trieascc', methods: ['GET'])]
     public function ascendingAction(FormationnRepository $FormationnRepository)
     {
@@ -96,7 +108,7 @@ class FormationController extends AbstractController
     #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
     public function delete(Request $request, Formationn $formation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$formation->getIdFor(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->request->get('_token'))) {
             $entityManager->remove($formation);
             $entityManager->flush();
         }
