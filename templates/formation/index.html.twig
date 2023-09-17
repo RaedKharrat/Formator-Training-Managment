@@ -4,6 +4,13 @@
 
 {% block body %}
     <h1>Formation index</h1>
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="{{ path('app_search_formation') }}">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+  
+</div>
 <div style="display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center">
     <a href="{{ path('app_trieascc') }}" class="bi bi-arrow-up" >Sort (Date) ASC</a>
     <a href="{{ path('app_triedescc') }}" class="bi bi-arrow-down" >Sort (Date) DESC</a>
@@ -46,5 +53,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_formation_new') }}"><i class="bi bi-plus"></i>Create new</a>
+    <a href="{{ path('app_formation_new') }}" class="btn btn-dark"><i class="bi bi-plus"></i>Create new</a>
 {% endblock %}

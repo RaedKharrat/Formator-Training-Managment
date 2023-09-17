@@ -40,6 +40,26 @@ class FormationController extends AbstractController
         ]);
     }
 
+
+    #[Route('/search', name: 'app_search_formation', methods: ['POST'])]
+public function searchAction(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $query = $request->request->get('query'); // Get the search query from the form input
+
+    // Create a DQL query to filter reclamations based on recText
+    $dql = "SELECT f FROM App\Entity\Formationn f WHERE f.nomFor LIKE :query";
+    
+    // Execute the DQL query
+    $formations = $entityManager->createQuery($dql)
+        ->setParameter('query', '%' . $query . '%')
+        ->getResult();
+
+    // Render the 'index.html.twig' template with the filtered reclamations
+    return $this->render('formation/index.html.twig', [
+        'formations' => $formations,
+    ]);
+}
+
     #[Route('/trieasc', name: 'app_trieascc', methods: ['GET'])]
     public function ascendingAction(FormationnRepository $FormationnRepository)
     {

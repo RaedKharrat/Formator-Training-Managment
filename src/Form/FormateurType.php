@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType; // Import the TextareaType
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class FormateurType extends AbstractType
 {
@@ -23,7 +24,7 @@ class FormateurType extends AbstractType
                 'label' => 'Last Name',
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Write your second last name '],
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => ['class' => 'form-control', 'placeholder' => 'exemple@exmple.xxx'],
             ])

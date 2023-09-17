@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use App\Repository\FormateurRepository;
+use App\Entity\Formationn;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -14,14 +19,14 @@ class PdfGeneratiionController extends AbstractController
 {
 
     #[Route('/pdf', name: 'app_generate_pdf', methods: ['GET'])]
-    public function generatePdfAction(): Response
+    public function generatePdfAction(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $data = [
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            // Add more data as needed
-        ];
+        $formations = $entityManager
+        ->getRepository(Formationn::class)
+        ->findAll();
+
+
         // Create a Dompdf instance
         $pdfOptions = new Options();
         $pdfOptions->set('isHtml5ParserEnabled', true);
@@ -30,7 +35,7 @@ class PdfGeneratiionController extends AbstractController
 
         // Generate some HTML content for the PDF (replace with your own template)
         $html = $this->renderView('formation/pdf.html.twig', [
-            'data' => $data, // Pass any data you want to include in the PDF
+            'formations' => $formations, // Pass the data to the PDF template
         ]);
 
         // Load HTML content into Dompdf

@@ -41,6 +41,24 @@ class FormatteurController extends AbstractController
         ]);
     }
 
+    #[Route('/search', name: 'app_search_formateur', methods: ['POST'])]
+public function searchAction(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $query = $request->request->get('query'); // Get the search query from the form input
+
+    // Create a DQL query to filter reclamations based on recText
+    $dql = "SELECT f FROM App\Entity\Formateur f WHERE f.name LIKE :query";
+    
+    // Execute the DQL query
+    $formatteurs = $entityManager->createQuery($dql)
+        ->setParameter('query', '%' . $query . '%')
+        ->getResult();
+
+    // Render the 'index.html.twig' template with the filtered reclamations
+    return $this->render('formatteur/index.html.twig', [
+        'formatteurs' => $formatteurs,
+    ]);
+}
 
 
     #[Route('/stats', name: 'app_stat', methods: ['GET'])]

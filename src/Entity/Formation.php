@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 /**
  * Formation
@@ -32,6 +33,7 @@ class Formation
     /**
      * @var \DateTime
      *
+     * @Assert\NotBlank(message="Please fill out the field")
      * @ORM\Column(name="Date_For", type="date", nullable=false)
      */
     private $dateFor;
@@ -39,13 +41,14 @@ class Formation
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Please fill out the field")
      * @ORM\Column(name="Nom_For", type="string", length=255, nullable=false)
      */
     private $nomFor;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message="Please fill out the field")
      * @ORM\Column(name="Numbr_Max_Per", type="integer", nullable=false)
      */
     private $numbrMaxPer;

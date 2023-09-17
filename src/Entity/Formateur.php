@@ -6,6 +6,7 @@ use App\Repository\FormateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 #[ORM\Entity(repositoryClass: FormateurRepository::class)]
 class Formateur
@@ -15,14 +16,24 @@ class Formateur
     #[ORM\Column]
     private ?int $id = null;
 
+     /**
+     * @Assert\NotBlank(message="Please fill out the field")
+     */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+     /**
+     * @Assert\NotBlank(message="Please fill out the field")
+     */
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+     /**
+     * @Assert\NotBlank(message="Please include an '@' in the email adress . ")
+     */
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $specialite = null;

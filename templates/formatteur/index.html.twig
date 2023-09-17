@@ -4,12 +4,19 @@
 
 {% block body %}
 <div style="position:relative;width:100%;">
-        <div style="position:absolute;right:0;width:50%; margin-right : 300px">
+        <div style="position:absolute;right:0;width:50%; margin-right : 100px">
             <a style="width:100%;" href="{{ path('app_stat') }} " class="btn btn-info" >Observe Statistic</a>
         </div>
-    </div>
+    
     <h1> List des Formateur</h1>
-
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="{{ path('app_search_formateur') }}">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+  
+</div>
+</div>
     <table class="table">
         <thead>
             <tr>
